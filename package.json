@@ -1,0 +1,17 @@
+{
+  "name": "RC_Controller",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/electron": "^1.6.10",
+    "@types/node": "^10.12.18",
+    "electron": "^4.0.1"
+  }
+}

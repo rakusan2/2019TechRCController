@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+.send {
+    bottom:1em;
+}
+body {
+    font: 16px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: white;
+    overflow: hidden;
+    background: #222;
+}
+button, input[type="text"], input[type="number"], .select-container, select {
+    color: white;
+    background: #444;
+    border: none;
+    font-size: 14px;
+    padding: 6px 8px;
+    cursor: pointer;
+    outline: 0;
+}
+.select-container {
+    padding: 0;
+    display: inline-block;
+}
+select {
+    border: none;
+    background: none;
+    color: white;
+    height: 25px;
+}
+input[type="text"], input[type="number"] {
+    cursor: text;
+}
+input[type="checkbox"] {
+    -webkit-filter: saturate(0);
+    filter: saturate(0);
+}
+/* Major interface panes, aside, article, header, etc. */
+body > * {
+    padding: 10px;
+    position: fixed;
+    overflow: scroll;
+    background: #222;
+}
+header {
+    width: 20vw;
+    height: 20vh;
+    top: 0;
+    left: 30vw;
+    color: white;
+}
+article {
+    top: 0;
+    left: 50vw;
+    height: 100vh;
+    width: 50vw;
+    border: 1px solid #7b7373
+}
+svg * {
+    stroke: white;
+    fill: #222;
+    stroke-width: 2;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+}
+text {
+    font-size: 16px;
+    letter-spacing: 2px;
+    stroke: none;
+    fill: white;
+}
+aside {
+    right: 0;
+    top: 0;
+    width: 15vw;
+    height: 100vh;
+}
+aside > * {
+    margin-bottom: 20px;
+}
+.greybox {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+body.login-close > .greybox {
+    display: none
+}
+#login {
+    text-align: center;
+    display: block;
+    margin: 14em auto 0 auto;
+    width: 18em;
+    overflow: hidden;
+    animation: 1s linear;
+    padding: 4px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.8)
+}
+body.login-close #login {
+    opacity: 1;
+    width: 0;
+    animation: 1s linear;
+}
+#login :disabled {
+    filter: opacity(0.6)
+}
+#login > button{
+    width:6em
+}
+#connect{
+    text-align: center;
+}
+/*
+ Blur transition that does not work
+
+body:not(.login-close) >:not(.greybox) {
+    animation: blur 1s normal forwards
+}
+body.login-close >:not(.greybox) {
+    animation: blur 1s reverse backwards
+}
+@keyframes blur {
+    from {
+        filter: blur(0);
+    }
+    to {
+        filter: blur(3px);
+    }
+}
+*/
