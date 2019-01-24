@@ -44,10 +44,15 @@ conButton.onclick = () => {
     conButton.disabled = true
     addr.disabled = true
 }
-addr.onkeydown = key => {
-    if (key.key == 'Enter') {
-        conButton.click()
-        key.stopPropagation()
+addr.onkeydown = clickOnEnter(conButton)
+usrMesg.onkeydown = clickOnEnter(sendButton)
+
+function clickOnEnter(button: HTMLButtonElement) {
+    return (key: KeyboardEvent) => {
+        if (key.key == 'Enter') {
+            button.click()
+            key.stopPropagation()
+        }
     }
 }
 let lastEsc = 0;

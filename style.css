@@ -6,8 +6,19 @@
 ::-webkit-scrollbar {
     display: none;
 }
-.send {
+#send {
     bottom:1em;
+}
+#messages{
+    height:90vh;
+    margin-bottom: 5px;
+    background-color: #444;
+}
+#mesg{
+    width:85%;
+}
+#send{
+    width:14%;
 }
 body {
     font: 16px sans-serif;
@@ -27,6 +38,9 @@ button, input[type="text"], input[type="number"], .select-container, select {
     padding: 6px 8px;
     cursor: pointer;
     outline: 0;
+}
+button:hover{
+    background-color: #333
 }
 .select-container {
     padding: 0;
