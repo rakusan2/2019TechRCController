@@ -13,6 +13,7 @@
     height:90vh;
     margin-bottom: 5px;
     background-color: #444;
+    scroll-behavior: auto;
 }
 #mesg{
     width:85%;
