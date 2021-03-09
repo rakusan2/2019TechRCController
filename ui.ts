@@ -1,4 +1,7 @@
-import { ipcRenderer as ipc } from 'electron'
+import { IpcRenderer } from "electron"
+
+declare var ipc: {send(key:string, ...val:any[]):void, on(key:string,fun:(...val:any[])=>any):void}
+
 const addr = document.getElementById('connect-address') as HTMLInputElement
 const conButton = document.getElementById('connect') as HTMLButtonElement
 const sendButton = document.getElementById('send') as HTMLButtonElement
@@ -7,25 +10,25 @@ const usrMesg = document.getElementById('mesg') as HTMLInputElement
 const baseConnectBtn = document.getElementById('cnnct') as HTMLButtonElement
 const batteryEl = document.getElementById('battery') as HTMLDivElement
 
-ipc.on('connected', (ev: any) => {
+ipc.on('connected', () => {
     document.body.classList.toggle('login-close', true);
     (<Text>baseConnectBtn.firstChild).data = 'Disconnect'
-    ipc.send('send','R10"AGTBDSU"')
+    ipc.send('send', 'R10"AGTBDSU"')
 })
-ipc.on('closed', (ev: any, hadErr: boolean) => {
+ipc.on('closed', (hadErr: boolean) => {
     document.body.classList.toggle('login-close', false)
     conButton.disabled = false
     addr.disabled = false;
     (<Text>conButton.firstChild).data = 'Connect'
     addr.focus()
 })
-var d:{[key:string]:string}={}
-ipc.on('data', (_: any, data: string) => {
-    data.split(',').forEach(a=>{
+var d: { [key: string]: string } = {}
+ipc.on('data', (data: string) => {
+    data.split(',').forEach(a => {
         var t = a.split('=')
         d[t[0]] = t[1];
     })
-    batteryEl.textContent = d['B']+'V'
+    batteryEl.textContent = d['B'] + 'V'
     addToList(data)
 })
 function addToList(data: string) {
@@ -72,24 +75,24 @@ onkeydown = key => {
             (<Text>baseConnectBtn.firstChild).data = 'Connect'
         }
         lastEsc = now
-    }else if(key.key == 'ArrowDown'){
+    } else if (key.key == 'ArrowDown') {
         ipc.send('send', 'D-200');
-    }else if(key.key == 'ArrowUp'){
+    } else if (key.key == 'ArrowUp') {
         ipc.send('send', 'D200');
-    }else if(key.key == 'ArrowLeft'){
+    } else if (key.key == 'ArrowLeft') {
         ipc.send('send', 'Sl-200');
-    }else if(key.key == 'ArrowRight'){
+    } else if (key.key == 'ArrowRight') {
         ipc.send('send', 'Dr200');
     }
 }
 onkeyup = key => {
-    if(key.key == 'ArrowDown'){
+    if (key.key == 'ArrowDown') {
         ipc.send('send', 'D0');
-    }else if(key.key == 'ArrowUp'){
+    } else if (key.key == 'ArrowUp') {
         ipc.send('send', 'D0');
-    }else if(key.key == 'ArrowLeft'){
+    } else if (key.key == 'ArrowLeft') {
         ipc.send('send', 'Sc200');
-    }else if(key.key == 'ArrowRight'){
+    } else if (key.key == 'ArrowRight') {
         ipc.send('send', 'Dc-200');
     }
 }

@@ -9,9 +9,9 @@ let connected = false
 
 client.setTimeout(1000)
 
-function send(event: string, val?: any) {
+function send(event: string, ...val: any[]) {
     if (mainWindow != null) {
-        mainWindow.webContents.send(event, val)
+        mainWindow.webContents.send(event, ...val)
     }
 }
 
@@ -22,9 +22,10 @@ function createWindow() {
         connected = true
         console.log('connected')
     })
-    client.on('error', () => {
+    client.on('error', (err) => {
         send('closed', true)
         console.log('Had Error')
+        console.log(err)
     })
     client.on('closed', (error) => {
         connected = false
@@ -45,14 +46,14 @@ function createWindow() {
             send('data', 'NOT CONNECTED')
         }
     })
-    mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow(log({
         width: 1366,
         height: 570,
         show: false,
-        webPreferences: {
-            nodeIntegration: true
+        webPreferences:{
+            preload: __dirname + '/preload.js'
         }
-    })
+    }, "Preferences"))
     mainWindow.setPosition(0, 0)
     mainWindow.loadFile(__dirname + '/index.html')
     mainWindow.once('ready-to-show', () => {
@@ -77,3 +78,8 @@ app.on('activate', () => {
         createWindow()
     }
 })
+
+function log<T>(obj:T, name="Log"):T{
+    console.log(name, obj)
+    return obj
+}
